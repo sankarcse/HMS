@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box; margin-bottom:10;}
+
+.navbar {
+  width: 100%;
+  background-color: dodgerblue;
+  overflow: hidden;
+  margin-bottom: 5px;
+  position:relative;
+}
+.logoutclass:hover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+.logoutclass {
+    margin-top: 5px;
+    margin-left: 552px;
+    padding: 10px;
+    background-color: #8e3e3e;
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+	}
+
+
+.navbar a {
+  float: left;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+
+
+.adminNavbar {
+  width: 100%;
+  background-color: dodgerblue;
+  overflow: auto;
+  margin-bottom: 5px;
+}
+
+.adminNavbar a {
+  float: left;
+  padding: 5px;
+  color: white;
+  font-size: 17px;
+  margin-left:50px;
+  
+}
+
+.AdminRegisterPage{
+	text-align:center;
+
+}
+
+/*input[type=text] {
+    background-image: url('search-icon.png');
+    background-position: 9px 10px;
+    background-repeat: no-repeat;
+	padding-bottom:15px;
+	margin-left:25%;
+	editable:true;
+}*/
+ input[type=submit] {
+	
+	width:200;
+	height:200;
+    background-repeat: no-repeat;
+	padding-bottom:15px;
+	editable:true;
+}
+.loginPage{
+  display: block;
+  margin-bottom: 15px;
+text-align:center;
+ <!-- border: 10px groove green; -->
+}
+.srch{float: right;margin-right: 20px;width: auto;
+    height: auto;}
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+.input-field {
+  width: 300px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.header{
+  padding: 0px;
+  outline: none;
+  margin: 0 auto;
+  color: black;
+  margin-bottom:10px;
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}	
+/* Set a style for the submit button */
+.btn {
+ background-color: dodgerblue;
+    color: white;
+    padding: 8px 21px;
+    border: white;
+    cursor: pointer;
+   width: 129px;
+    opacity: 0.8;
+    box-shadow: 0 5px #666;
+    border-radius: 15px;
+}
+}
+
+.btn:hover {
+  opacity: 1;
+  background-color: green;
+}
+.btn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.btn:focus {
+outline:0;
+}
+.goBtn{margin-left:-32px;}
+
+
+
+.addressLable{
+	margin-right:240px;
+}
+
+.addressPart{
+	margin-left:50px;
+}
+
+
+.customerRegistration{
+	text-align:center;
+
+
+}
+.editPayment{
+	text-align:center;
+
+
+}
+.breakfastDetails{
+	text-align:center;
+
+
+}
+
+.hostelDetails{
+	text-align:center;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<script>
+
+	function createRooms(){
+		for(var i=0;i<document.getElementById('rooms').value;i++){
+	    var x = document.createElement("INPUT");
+		x.setAttribute("type", "text");
+		x.setAttribute("placeholder", "Room Name");
+		document.body.appendChild(x);
+		}
+	
+	
+	
+	}
+
+function dashboard(){
+	document.getElementById('dashboard').style.display="block";
+	document.getElementById('tab1').style.backgroundColor="green";
+	
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";                      
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+		document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+
+	
+
+	
+}
+
+function homeClick(){
+	document.getElementById('tab2').style.backgroundColor="green";
+	document.getElementById('homeNavbar').style.display="block";
+	document.getElementById('admintab1').style.backgroundColor="dodgerblue";
+	document.getElementById('admintab2').style.backgroundColor="dodgerblue";
+	document.getElementById('admintab3').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab1').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab2').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab3').style.backgroundColor="dodgerblue";
+
+	
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	
+	
+
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+
+		document.getElementById('editPayment').style.display="none";
+
+
+
+}
+
+
+function adminPage(){
+
+	document.getElementById('adminNavbar').style.display="block";
+	document.getElementById('tab3').style.backgroundColor="green";
+	document.getElementById('admintab1').style.backgroundColor="dodgerblue";
+	document.getElementById('admintab2').style.backgroundColor="dodgerblue";
+	document.getElementById('admintab3').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab1').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab2').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab3').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+
+		document.getElementById('editPayment').style.display="none";
+
+
+
+}
+
+function adminRegister(){
+	document.getElementById('adminNavbar').style.display="block";
+	document.getElementById('AdminRegisterPage').style.display="block";
+	document.getElementById('tab3').style.backgroundColor="green";
+	document.getElementById('admintab1').style.backgroundColor="green";
+	
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+
+	
+	
+
+}
+
+
+function custRegister(){
+	document.getElementById('customerRegistration').style.display="block";
+	document.getElementById('homeNavbar').style.display="block";
+	document.getElementById('tab2').style.backgroundColor="green";
+	document.getElementById('hometab1').style.backgroundColor="green";
+
+	
+	
+	
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+
+
+}
+
+function hostelDetails(){
+	document.getElementById('hostelDetailsNavbar').style.display="block";
+	
+	document.getElementById('tab4').style.backgroundColor="green";
+
+	
+	
+		document.getElementById('hostel1').style.backgroundColor="dodgerblue";
+			document.getElementById('hostel2').style.backgroundColor="dodgerblue";
+
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+
+	
+	}
+	
+	
+	
+function hostelDetailsEdit(){
+	document.getElementById('hostelDetailsNavbar').style.display="block";
+	document.getElementById('tab4').style.backgroundColor="green";
+	document.getElementById('hostel1').style.backgroundColor="green";
+	document.getElementById('hostelDetails').style.display="block";
+	
+	
+
+	
+	
+	document.getElementById('hostel2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+
+	
+	
+	
+	}
+	
+	function breakfastDetailsEdit(){
+	
+	document.getElementById('hostelDetailsNavbar').style.display="block";
+	document.getElementById('breakfastDetails').style.display="block";
+
+	document.getElementById('tab4').style.backgroundColor="green";
+	document.getElementById('hostel2').style.backgroundColor="green";
+	
+
+	
+	
+	document.getElementById('hostel1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+			document.getElementById('editPayment').style.display="none";
+
+	
+	}
+	
+	function paymentDetails(){
+	
+	document.getElementById('paymentNavbar').style.display="block";
+
+	document.getElementById('tab5').style.backgroundColor="green";
+	document.getElementById('hostel2').style.backgroundColor="none";
+	
+	document.getElementById('hostel1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+	document.getElementById('editPayment').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('payment1').style.backgroundColor="dodgerblue";
+
+						
+	}
+	
+	
+		function doPayment(){
+	
+	document.getElementById('paymentNavbar').style.display="block";
+	document.getElementById('editPayment').style.display="block";
+	document.getElementById('tab5').style.backgroundColor="green";
+	document.getElementById('payment1').style.backgroundColor="green";
+	
+	document.getElementById('hostel1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	}
+	
+	function pageloadfunction(){
+		document.getElementById('adminNavbar').style.display="none";
+		document.getElementById('homeNavbar').style.display="none";
+		document.getElementById('hostelDetailsNavbar').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('AdminRegisterPage').style.display="none";
+		document.getElementById('customerRegistration').style.display="none";
+		document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('breakfastDetails').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+	}
+	
+	function logoutfun(){
+		const request=new XMLHttpRequest();
+		request.open("post","/sessionControllers/destroy");		
+	    window.open("index.html","_self");
+	}
+	
+	
+
+	function preback(){
+		window.history.forward();
+		window.history.backward();
+	}
+	setTimeout("preback()",0);
+	window.onunload=function(){null};
+
+
+</script>
+<header><title>Everest Boys Hostel</title></header>
+<body onload="pageloadfunction()">
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <a id="tab1" onclick="dashboard()"></i>Dashborad</a>
+  <a id="tab2" onclick="homeClick();"><i class="fa fa-fw fa-home"></i> Home</a> 
+  <a id="tab3" onclick="adminPage()"><i class="fa fa-user-circle-o" ></i>Admin</a> 
+  <a id="tab4" onclick="hostelDetails()">
+<!--<i class="fa fa-hotel"></i>--> Hostel Details</a> 
+  <a id="tab5" onclick="paymentDetails()"><i class="fa fa-rupee"></i> Payment Details</a>
+  <button class="logoutclass" onclick="logoutfun()">Logout</button>
+</div>
+ 
+<div id="dashboard"class="dashboard">
+<p class="srch"><input type="search" class=""><input class="goBtn" type="button" value="GO"></p>
+
+</div>
+
+<div id="adminNavbar">
+<div class="adminNavbar">
+  <a id="admintab1" onclick="adminRegister()"></i>Register User</a>
+  <a id="admintab2" onclick="adminEdit();"><i class="fa fa-pencil-square-o"></i>Edit User</a> 
+  <a id="admintab3" onclick="adminDelete()"><i class="fa fa-trash"></i>Delete User</a>
+</div>
+</div>
+
+<div id="homeNavbar">
+<div class="adminNavbar">
+  <a id="hometab1" onclick="custRegister()"></i>Add Customer</a>
+  <a id="hometab2" onclick="custEdit();"><i class="fa fa-pencil-square-o"></i>Edit Customer</a> 
+  <a id="hometab3" onclick="custDelete()"><i class="fa fa-trash"></i>Delete Customer</a>
+</div>
+</div>
+
+<div id="hostelDetailsNavbar">
+<div class="adminNavbar">
+  <a id="hostel1" onclick="hostelDetailsEdit();"><i class="fa fa-pencil-square-o"></i>Edit Hostel Details</a> 
+  <a id="hostel2" onclick="breakfastDetailsEdit()"><i class="fa fa-pencil-square-o"></i>Edit Break Fast Details</a>
+</div>
+</div>
+
+<div id="paymentNavbar">
+<div class="adminNavbar">
+  <a id="payment1" onclick="doPayment()">Do Payment</a>
+</div>
+</div>
+
+
+
+
+<div id="AdminRegisterPage" class="AdminRegisterPage">
+<label style="margin-right:220px;">First Name</label>
+  <div  class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+  </div>
+  <label style="margin-right:220px;">Last Name</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+  </div>
+<label style="margin-right:250px;">Email</label>
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email">
+  </div>
+  <label style="margin-right:220px;">Password</label>
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="password">
+  </div>
+  <label style="margin-right:160px;">Confirm Password</label>
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Confirm Password" name="confirmPassword">
+  </div>
+<label style="margin-right:180px;">Phone Number</label>
+ <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
+  </div>
+  <label style="margin-right:130px;">Adhaar Card Number</label>
+  <div class="input-container">
+    <i class="fa fa-id-card icon"></i>
+    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+  </div>
+
+  <button type="submit" class="btn">Register</button>
+  
+  </div>
+
+
+
+  
+<!--customer registration form-->  
+<form action="/action_page.php" style="max-width:500px;margin:auto;" >
+<div class="customerRegistration" id="customerRegistration">
+<label style="margin-right:220px">First Name</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+  </div>
+  <label style="margin-right:220px">Last Name</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+  </div>
+  
+  <label style="margin-right:220px">Joining Date</label>
+  <div class="input-container">
+    <i class="fa fa-calendar icon"></i>
+    <input class="input-field" type="date" placeholder="Joining Date" name="joiningDate">
+  </div>
+  
+<label style="margin-right:270px">Email</label>
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email (Optional)" name="email">
+  </div>
+<label style="margin-right:200px">Phone Number</label>
+ <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
+  </div>
+  <label style="margin-right:150px">Adhaar Card Number</label>
+  <div class="input-container">
+    <i class="fa fa-id-card icon"></i>
+    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+  </div>
+  
+  <label style="margin-right:220px">Profession</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Profession" name="profession">
+  </div>
+  
+  <label style="margin-right:220px">Work Place</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Work Place" name="workPlace">
+  </div>
+  <div class="addressLable">
+	<i class="fa fa-home icon"></i>
+    <label  class="label">Address</label>
+	</div></br>
+	<div class="addressPart">
+   <label style="margin-right:210px">Home Town</label>
+  <div class="input-container">
+    <input class="input-field" type="text" placeholder="Home Town" name="homeTown">
+  </div>
+  
+   <label style="margin-right:250px">District</label>
+  <div class="input-container">
+    <input class="input-field" type="text" placeholder="District" name="district">
+  </div>
+  
+   <label style="margin-right:260px">State</label>
+  <div class="input-container">
+    <input class="input-field" type="text" placeholder="State" name="state">
+  </div>
+
+ <label style="margin-right:240px">Country</label>
+  <div class="input-container">
+    
+    <input class="input-field" type="text" placeholder="Country" name="country">
+  </div>
+  <label style="margin-right:170px">Pin Code Number</label>
+  <div class="input-container">
+    <input class="input-field" type="text" placeholder="Pin Code Number" name="pinCode">
+  </div>  
+  <button type="submit" class="btn">Add Customer</button>
+  </div>
+  </div>
+</form>
+
+  
+  
+  <form action="/action_page.php" style="max-width:500px;margin:auto;" >
+
+
+<div id="hostelDetails" class="hostelDetails">
+<label style="margin-right:200px">Hostel Name</label>
+  <div class="input-container">
+    <input class="input-field" type="text" placeholder="Hostel Name" name="hostelName">
+  </div>
+  
+   <label style="margin-right:210px">Total Floors</label>
+  <div class="input-container">
+    <input id="floors" class="input-field" type="number" placeholder="Total Floors" name="totalFloors" onblur="createFloors()">
+  </div>
+  <label style="margin-right:200px">Total Rooms</label>
+  <div class="input-container">
+    <input id="rooms" class="input-field" type="number" placeholder="Total Rooms" name="totalRooms" onblur="createRooms()">
+  </div>
+  
+  <label style="margin-right:150px">Total Sharing Types</label>
+  <div class="input-container">
+    <input id="sharings" class="input-field" type="number" placeholder="Total Sharing Types" name="sharings" onblur="sharingTypes()">
+  </div>
+  
+   <label style="margin-right:180px">Fee Due Days</label>
+  <div class="input-container">
+    <input  class="input-field" type="number" placeholder="Fee Due Days" name="dueDays">
+  </div>
+  <button type="submit" class="btn">Edit</button>
+  </div>
+</form>
+
+  
+    
+  
+  <form action="/action_page.php" style="max-width:500px;margin:auto;" >
+
+<div id="breakfastDetails" class="breakfastDetails">
+<label style="margin-right:200px">Sunday Item</label>
+  <div class="input-container">
+    <input class="input-field" type="text" placeholder="Sunday Item" name="sun">
+  </div>
+  
+   <label style="margin-right:200px">Monday Item</label>
+  <div class="input-container">
+    <input id="floors" class="input-field" type="text" placeholder="Monday Item" name="mon" >
+  </div>
+  <label style="margin-right:200px">Tuesday Item</label>
+  <div class="input-container">
+    <input id="rooms" class="input-field" type="text" placeholder="Tuesday Item" name="tue" >
+  </div>
+  
+  <label style="margin-right:170px">Wednesday Item</label>
+  <div class="input-container">
+    <input id="sharings" class="input-field" type="text" placeholder="Wednesday Item" name="wed" >
+  </div>
+  
+   <label style="margin-right:190px">Thursday Item</label>
+  <div class="input-container">
+    <input  class="input-field" type="text" placeholder="Thursday Item" name="thu">
+  </div>
+   <label style="margin-right:210px">Friday Item</label>
+  <div class="input-container">
+    <input  class="input-field" type="text" placeholder="Friday Item" name="fri">
+  </div>
+   <label style="margin-right:190px">Saturday Item</label>
+  <div class="input-container">
+    <input  class="input-field" type="text" placeholder="Saturday Item" name="sat">
+  </div>
+  <button type="submit" class="btn">Edit</button>
+  </div>
+</form>
+  
+  
+  <form action="/action_page.php" style="max-width:500px;margin:auto;" >
+<div class="editPayment" id="editPayment">
+<label style="margin-right:220px">First Name</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+  </div>
+  <label style="margin-right:220px">Last Name</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+  </div>
+  
+  <!--auto fill based on user date of joining-->
+  <label style="margin-right:220px">Joining Date</label>
+  <div class="input-container">
+    <i class="fa fa-calendar icon"></i>
+    <input class="input-field" type="date" placeholder="Joining Date" name="joiningDate">
+  </div>
+  
+<label style="margin-right:270px">Email</label>
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email (Optional)" name="email">
+  </div>
+<label style="margin-right:200px">Phone Number</label>
+ <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
+  </div>
+  <label style="margin-right:200px">Room Number</label>
+  <div class="input-container">
+<i class="fa fa-hotel icon"></i> 
+   
+    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+  </div>
+  
+   <label style="margin-right:220px">Actual Fee</label>
+  <div class="input-container">
+    <i class="fa fa-rupee icon"></i>
+    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+  </div>
+   <label style="margin-right:200px">Now Paying</label>
+  <div class="input-container">
+    <i class="fa fa-rupee icon"></i>
+    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+  </div>
+  <button type="submit" class="btn">Pay</button>
+ </div>
+</form>
+
+</body>
+</html> 
+

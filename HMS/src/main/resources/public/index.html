@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/*input[type=text] {
+    background-image: url('search-icon.png');
+    background-position: 9px 10px;
+    background-repeat: no-repeat;
+	padding-bottom:15px;
+	margin-left:25%;
+	editable:true;
+}*/
+input[type=submit] {
+	width: 200;
+	height: 200;
+	background-repeat: no-repeat;
+	padding-bottom: 15px;
+	editable: true;
+}
+
+.loginPage {
+	display: block;
+	margin-top: 200px;
+	text-align: center; <!--
+	border: 10px groove green;
+	-->
+}
+
+.srch {
+	float: right;
+	margin-right: 20px;
+	width: auto;
+	height: auto;
+}
+
+.icon {
+	padding: 10px;
+	background: dodgerblue;
+	color: white;
+	min-width: 50px;
+	text-align: center;
+}
+
+.input-field {
+	width: 300px;
+	padding: 10px;
+	outline: none;
+	margin-bottom: 10px;
+}
+
+.header {
+	padding: 0px;
+	outline: none;
+	margin: 0 auto;
+	color: black;
+	margin-bottom: 10px;
+}
+
+.input-field:focus {
+	border: 2px solid dodgerblue;
+}
+/* Set a style for the submit button */
+.btn {
+	background-color: dodgerblue;
+	color: white;
+	padding: 8px 21px;
+	border: white;
+	cursor: pointer;
+	width: 123px;
+	opacity: 0.8;
+	box-shadow: 0 5px #666;
+	border-radius: 15px;
+}
+
+}
+.btn:hover {
+	opacity: 1;
+	background-color: green;
+}
+
+.btn:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+.btn:focus {
+	outline: 0;
+}
+
+.goBtn {
+	margin-left: -32px;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 300px; /* Full width */
+  height: 200px; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  margin-left:500px;
+    margin-top:200px;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<script>
+function login_submit_form(){
+	const myform=document.getElementById('login_submit_form');
+	var modal = document.getElementById("myModal");
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick=function(){
+		modal.style.display="none";
+	}
+	modal.style.display="none";
+	//console.log(myform);
+	myform.addEventListener("submit",(e)=>{
+		e.preventDefault();
+		const request=new XMLHttpRequest();
+		request.open("post","/loginController/login");
+		request.send(new FormData(myform));
+		request.onload=function(){
+			
+			var obj=JSON.parse(request.responseText);
+			if(obj.validation==='valid'){
+				request.open("post","/sessionControllers/persistMessage");
+				request.send(new FormData(myform));
+				window.open("headerPage.html","_self");
+								
+			}
+			else{
+				
+				modal.style.display="block";
+				
+			}
+		}
+		
+	});
+}
+
+function preback(){
+	window.history.forward();
+	window.history.backward();
+}
+setTimeout("preback()",20000);
+window.onunload=function(){null};
+
+
+</script>
+<body>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Error! invalid credetials</p>
+  </div>
+
+</div>
+	<!-- action="/loginController/login" -->
+	<form id="login_submit_form" style="max-width: 500px; margin: auto">
+		<div id="loginPage" class="loginPage">
+			<label style="margin-right: 250px">User Name</label>
+			<div class="input-container">
+				<i class="fa fa-user icon"></i> <input class="input-field"
+					type="text" placeholder="Username" id="userName" name="userName">
+			</div>
+			<label style="margin-right: 250px">Password</label>
+			 <div class="input-container">
+				<i class="fa fa-key icon"></i> <input class="input-field"
+					type="password" placeholder="Password" id="password" name="password"></br>
+				<button type="submit" class="btn" onclick="login_submit_form()">Login</button>
+				<a href="forgotpassword.html">forgot password</a>
+			</div>
+	</form>
+</body>
+</html>
