@@ -17,8 +17,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>com.hms.UserRegistrationApplication</start-class>
 	</properties>
-
+<packaging>war</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,10 +52,10 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.4.10.Final</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

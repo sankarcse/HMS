@@ -515,6 +515,10 @@ function hostelDetailsEdit(){
 </script>
 <header><title>Everest Boys Hostel</title></header>
 <body onload="pageloadfunction()">
+
+<div id="totalPagediv">
+<!-- dashboard div -->
+<div id="dash">
 <div class="navbar navbar-inverse navbar-fixed-top">
   <a id="tab1" onclick="dashboard()"></i>Dashborad</a>
   <a id="tab2" onclick="homeClick();"><i class="fa fa-fw fa-home"></i> Home</a> 
@@ -524,88 +528,19 @@ function hostelDetailsEdit(){
   <a id="tab5" onclick="paymentDetails()"><i class="fa fa-rupee"></i> Payment Details</a>
   <button class="logoutclass" onclick="logoutfun()">Logout</button>
 </div>
- 
 <div id="dashboard"class="dashboard">
 <p class="srch"><input type="search" class=""><input class="goBtn" type="button" value="GO"></p>
-
-</div>
-
-<div id="adminNavbar">
-<div class="adminNavbar">
-  <a id="admintab1" onclick="adminRegister()"></i>Register User</a>
-  <a id="admintab2" onclick="adminEdit();"><i class="fa fa-pencil-square-o"></i>Edit User</a> 
-  <a id="admintab3" onclick="adminDelete()"><i class="fa fa-trash"></i>Delete User</a>
 </div>
 </div>
 
+
+<!--home div-->
 <div id="homeNavbar">
 <div class="adminNavbar">
   <a id="hometab1" onclick="custRegister()"></i>Add Customer</a>
   <a id="hometab2" onclick="custEdit();"><i class="fa fa-pencil-square-o"></i>Edit Customer</a> 
   <a id="hometab3" onclick="custDelete()"><i class="fa fa-trash"></i>Delete Customer</a>
 </div>
-</div>
-
-<div id="hostelDetailsNavbar">
-<div class="adminNavbar">
-  <a id="hostel1" onclick="hostelDetailsEdit();"><i class="fa fa-pencil-square-o"></i>Edit Hostel Details</a> 
-  <a id="hostel2" onclick="breakfastDetailsEdit()"><i class="fa fa-pencil-square-o"></i>Edit Break Fast Details</a>
-</div>
-</div>
-
-<div id="paymentNavbar">
-<div class="adminNavbar">
-  <a id="payment1" onclick="doPayment()">Do Payment</a>
-</div>
-</div>
-
-
-
-
-<div id="AdminRegisterPage" class="AdminRegisterPage">
-<label style="margin-right:220px;">First Name</label>
-  <div  class="input-container">
-    <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="First Name" name="firstName">
-  </div>
-  <label style="margin-right:220px;">Last Name</label>
-  <div class="input-container">
-    <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
-  </div>
-<label style="margin-right:250px;">Email</label>
-  <div class="input-container">
-    <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" placeholder="Email" name="email">
-  </div>
-  <label style="margin-right:220px;">Password</label>
-  <div class="input-container">
-    <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" placeholder="Password" name="password">
-  </div>
-  <label style="margin-right:160px;">Confirm Password</label>
-  <div class="input-container">
-    <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" placeholder="Confirm Password" name="confirmPassword">
-  </div>
-<label style="margin-right:180px;">Phone Number</label>
- <div class="input-container">
-    <i class="fa fa-phone icon"></i>
-    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
-  </div>
-  <label style="margin-right:130px;">Adhaar Card Number</label>
-  <div class="input-container">
-    <i class="fa fa-id-card icon"></i>
-    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
-  </div>
-
-  <button type="submit" class="btn">Register</button>
-  
-  </div>
-
-
-
-  
 <!--customer registration form-->  
 <form action="/action_page.php" style="max-width:500px;margin:auto;" >
 <div class="customerRegistration" id="customerRegistration">
@@ -687,11 +622,67 @@ function hostelDetailsEdit(){
   </div>
 </form>
 
-  
-  
-  <form action="/action_page.php" style="max-width:500px;margin:auto;" >
+</div>
 
 
+<!-- admin div -->
+<div id="adminNavbar1">
+<div id="adminNavbar" class="adminNavbar">
+  <a id="admintab1" onclick="adminRegister()"></i>Register User</a>
+  <a id="admintab2" onclick="adminEdit();"><i class="fa fa-pencil-square-o"></i>Edit User</a> 
+  <a id="admintab3" onclick="adminDelete()"><i class="fa fa-trash"></i>Delete User</a>
+</div>
+
+<div id="AdminRegisterPage" class="AdminRegisterPage">
+<label style="margin-right:220px;">First Name</label>
+  <div  class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+  </div>
+  <label style="margin-right:220px;">Last Name</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+  </div>
+<label style="margin-right:250px;">Email</label>
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email">
+  </div>
+  <label style="margin-right:220px;">Password</label>
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="password">
+  </div>
+  <label style="margin-right:160px;">Confirm Password</label>
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Confirm Password" name="confirmPassword">
+  </div>
+<label style="margin-right:180px;">Phone Number</label>
+ <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
+  </div>
+  <label style="margin-right:130px;">Adhaar Card Number</label>
+  <div class="input-container">
+    <i class="fa fa-id-card icon"></i>
+    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+  </div>
+
+  <button type="submit" class="btn">Register</button>
+  
+  </div>
+</div>
+
+
+<!-- hostel details div -->
+<div id="hostelDetails1">
+<div id="hostelDetailsNavbar" class="adminNavbar">
+  <a id="hostel1" onclick="hostelDetailsEdit();"><i class="fa fa-pencil-square-o"></i>Edit Hostel Details</a> 
+  <a id="hostel2" onclick="breakfastDetailsEdit()"><i class="fa fa-pencil-square-o"></i>Edit Break Fast Details</a>
+</div>  
+<form action="/action_page.php" style="max-width:500px;margin:auto;" >
 <div id="hostelDetails" class="hostelDetails">
 <label style="margin-right:200px">Hostel Name</label>
   <div class="input-container">
@@ -720,11 +711,7 @@ function hostelDetailsEdit(){
   </div>
 </form>
 
-  
-    
-  
-  <form action="/action_page.php" style="max-width:500px;margin:auto;" >
-
+ <form action="/action_page.php" style="max-width:500px;margin:auto;" >
 <div id="breakfastDetails" class="breakfastDetails">
 <label style="margin-right:200px">Sunday Item</label>
   <div class="input-container">
@@ -760,8 +747,15 @@ function hostelDetailsEdit(){
   <button type="submit" class="btn">Edit</button>
   </div>
 </form>
-  
-  
+</div>
+
+
+
+<div id="paymentDetails1">
+<div id="paymentNavbar" class="adminNavbar">
+  <a id="payment1" onclick="doPayment()">Do Payment</a>
+</div>
+
   <form action="/action_page.php" style="max-width:500px;margin:auto;" >
 <div class="editPayment" id="editPayment">
 <label style="margin-right:220px">First Name</label>
@@ -812,7 +806,8 @@ function hostelDetailsEdit(){
   <button type="submit" class="btn">Pay</button>
  </div>
 </form>
-
+</div>
+</div>
 </body>
 </html> 
 

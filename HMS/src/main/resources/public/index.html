@@ -145,6 +145,14 @@ input[type=submit] {
 </head>
 <script>
 function login_submit_form(){
+	var uname=document.getElementById('userName').value;
+	var pass=document.getElementById('password').value;
+	
+	
+	
+	
+	
+	if((uname!='')&&(pass!='')){
 	const myform=document.getElementById('login_submit_form');
 	var modal = document.getElementById("myModal");
 	var span = document.getElementsByClassName("close")[0];
@@ -175,6 +183,9 @@ function login_submit_form(){
 		}
 		
 	});
+	}else{
+		window.alert("form cannot be empty");
+	}
 }
 
 function preback(){

@@ -1,9 +1,19 @@
 package com.hms.controllers;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public abstract class ForgotPasswordController {
 
-	public ForgotPasswordController() {
-		// TODO Auto-generated constructor stub
+	@PostMapping("/testUserName")
+	public String testUserName() {
+		
+		
+		return null;
+		
 	}
 
 }
