@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.hms.entities.LoginEntity;
 import com.hms.services.LoginService;
 
@@ -20,21 +23,28 @@ public class LoginController {
 	@Autowired
 	private LoginService service;
 
-	@PostMapping(value = "/login", produces = "application/json")
+	@PostMapping(value = "/login", produces = { "application/json" })
 	@ResponseBody
-	public Map<String,String> loginUser(@RequestParam(value = "userName") String email,
-			@RequestParam("password") String password) {
-		LoginEntity loginEntity=new LoginEntity(email,password);
+	public String loginUser(@RequestParam(value = "userName") String email,
+			@RequestParam("password") String password) throws JsonProcessingException {
+		LoginEntity loginEntity = new LoginEntity(email, password);
 		System.out.println(loginEntity.getClass());
-		Map<String,String> map=new HashMap<String,String>();
+		Map<String, String> map = new HashMap<String, String>();
+		// JsonObject obj=new JsonObject();
 		if ("valid".equals(service.loginUser(loginEntity))) {
-			
-			
+
+			// obj.addProperty("validation", "valid");
 			map.put("validation", "valid");
-			return map;
+			 ObjectMapper objectMapper = new ObjectMapper();
+			 String json=objectMapper.writeValueAsString(map);
+			return json;
 		} else {
 			map.put("validation", "invalid");
-			return map;
+			// obj.addProperty("validation", "valid");
+
+			 ObjectMapper objectMapper = new ObjectMapper();
+			 String json=objectMapper.writeValueAsString(map);
+			return json;
 		}
 	}
 }

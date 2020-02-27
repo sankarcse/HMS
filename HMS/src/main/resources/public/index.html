@@ -142,61 +142,74 @@ input[type=submit] {
   cursor: pointer;
 }
 </style>
-</head>
-<script>
-function login_submit_form(){
-	var uname=document.getElementById('userName').value;
-	var pass=document.getElementById('password').value;
-	
-	
-	
-	
-	
-	if((uname!='')&&(pass!='')){
-	const myform=document.getElementById('login_submit_form');
-	var modal = document.getElementById("myModal");
-	var span = document.getElementsByClassName("close")[0];
-	span.onclick=function(){
-		modal.style.display="none";
-	}
-	modal.style.display="none";
-	//console.log(myform);
-	myform.addEventListener("submit",(e)=>{
-		e.preventDefault();
-		const request=new XMLHttpRequest();
-		request.open("post","/loginController/login");
-		request.send(new FormData(myform));
-		request.onload=function(){
-			
-			var obj=JSON.parse(request.responseText);
-			if(obj.validation==='valid'){
-				request.open("post","/sessionControllers/persistMessage");
-				request.send(new FormData(myform));
-				window.open("headerPage.html","_self");
-								
-			}
-			else{
-				
-				modal.style.display="block";
-				
-			}
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script> 
+
+
+
+
+
+<script >
+/* $("form#login_submit_form").submit(function(e){
+	var postData=$(this).serialize();
+	alert("in");
+	var formUrl="/loginController/login";
+	alert("in");
+	 $.ajax({
+		url: formUrl,
+		type:"POST",
+		data:postData,
+		success:function(data, textStatus, jqXHR){
+			alert(data);
+		},
+	 error: function(jqXHR, textStatus, errorThrown) 
+		{
 		}
+	}); 
+	 e.preventDefault();	//STOP default action
+}); */
+
+function loginFun(){
+	
+	var modelObj={
+			userName:$("#userName").val(),
+			password:$("#password").val()
+	};
+	
+	if((modelObj.userName!='')&&(modelObj.password!='')){
+		//const myform=document.getElementById('login_submit_form');
+		var modal = document.getElementById("myModal");
+		var span = document.getElementsByClassName("close")[0];
+		span.onclick=function(){
+			modal.style.display="none";
+		}
+	}else
+		modal.style.display="block";
+	
+	//console.log("post data"+modelObj.userName);
+	
+	 $.ajax({
+		type:"POST",
+		url:"/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
+		headers:{
+			"Content-Type":"application/json",
+			"Accept":"application/json"
+		},
+		success:function(data){
+			if(data.validation=="valid"){
+				window.open("headerPage.html","_self");
+			}else{
+				modal.style.display="block";
+				}
+		},error:function(jqXHR,textStatus,errorThrown){
+			
+		} 
 		
 	});
-	}else{
-		window.alert("form cannot be empty");
-	}
+	
 }
 
-function preback(){
-	window.history.forward();
-	window.history.backward();
-}
-setTimeout("preback()",20000);
-window.onunload=function(){null};
 
-
-</script>
+</script></head>
 <body>
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -219,10 +232,10 @@ window.onunload=function(){null};
 			<label style="margin-right: 250px">Password</label>
 			 <div class="input-container">
 				<i class="fa fa-key icon"></i> <input class="input-field"
-					type="password" placeholder="Password" id="password" name="password"></br>
-				<button type="submit" class="btn" onclick="login_submit_form()">Login</button>
+					type="password" placeholder="Password" id="password" name="password" /></br>
+				<input type="button"  class="btn" onclick="loginFun()" value="Login" />
 				<a href="forgotpassword.html">forgot password</a>
-			</div>
+			</div></div>
 	</form>
 </body>
 </html>
