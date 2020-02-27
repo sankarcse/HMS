@@ -182,7 +182,7 @@ function loginFun(){
 			
 			$.ajax({
 				type:"GET",
-				url:"/HostelManagementSystems-0.0.1-SNAPSHOT/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
+				url:"/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
 				headers:{
 					"Content-Type":"application/json",
 					"Accept":"application/json"
@@ -191,7 +191,9 @@ function loginFun(){
 					if(data.validation=="valid"){
 						window.open("headerPage.html","_self");
 					}else{
-						window.alert("invalid username and password");
+						window.alert("invalid username or password");
+						document.getElementById('userName').value='';
+						document.getElementById('password').value='';
 						}
 				},error:function(jqXHR,textStatus,errorThrown){
 					
