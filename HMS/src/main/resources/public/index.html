@@ -188,8 +188,8 @@ function loginFun(){
 	//console.log("post data"+modelObj.userName);
 	
 	 $.ajax({
-		type:"POST",
-		url:"/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
+		type:"GET",
+		url:"/HostelManagementSystems-0.0.1-SNAPSHOT/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
 		headers:{
 			"Content-Type":"application/json",
 			"Accept":"application/json"

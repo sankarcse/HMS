@@ -3,8 +3,10 @@ package com.hms.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +25,7 @@ public class LoginController {
 	@Autowired
 	private LoginService service;
 
-	@PostMapping(value = "/login", produces = { "application/json" })
+	@GetMapping(value = "/login", produces = { "application/json" })
 	@ResponseBody
 	public String loginUser(@RequestParam(value = "userName") String email,
 			@RequestParam("password") String password) throws JsonProcessingException {
