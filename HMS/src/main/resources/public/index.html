@@ -175,52 +175,57 @@ function loginFun(){
 			password:$("#password").val()
 	};
 	
+	/* var modal = document.getElementById("myModal");
+	var span = document.getElementsByClassName("close")[0]; */
 	if((modelObj.userName!='')&&(modelObj.password!='')){
-		//const myform=document.getElementById('login_submit_form');
-		var modal = document.getElementById("myModal");
-		var span = document.getElementsByClassName("close")[0];
-		span.onclick=function(){
-			modal.style.display="none";
-		}
-	}else
-		modal.style.display="block";
-	
-	//console.log("post data"+modelObj.userName);
-	
-	 $.ajax({
-		type:"GET",
-		url:"/HostelManagementSystems-0.0.1-SNAPSHOT/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
-		headers:{
-			"Content-Type":"application/json",
-			"Accept":"application/json"
-		},
-		success:function(data){
-			if(data.validation=="valid"){
-				window.open("headerPage.html","_self");
-			}else{
-				modal.style.display="block";
-				}
-		},error:function(jqXHR,textStatus,errorThrown){
+		/* span.onclick=function(){ */
 			
-		} 
+			$.ajax({
+				type:"GET",
+				url:"/HostelManagementSystems-0.0.1-SNAPSHOT/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
+				headers:{
+					"Content-Type":"application/json",
+					"Accept":"application/json"
+				},
+				success:function(data){
+					if(data.validation=="valid"){
+						window.open("headerPage.html","_self");
+					}else{
+						window.alert("invalid username and password");
+						}
+				},error:function(jqXHR,textStatus,errorThrown){
+					
+				} 
+				
+			});
+			
+		}
+	else{
+		if(modelObj.userName==''){
+			window.alert("user name cannot be empty");
+		}else if(modelObj.password==''){
+			window.alert("password cannot be empty");
+		}
+	}
 		
-	});
 	
+	
+	 
 }
 
 
 </script></head>
 <body>
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<!-- <div id="myModal" class="modal">
 
-  <!-- Modal content -->
+  Modal content
   <div class="modal-content">
     <span class="close">&times;</span>
     <p>Error! invalid credetials</p>
   </div>
 
-</div>
+</div> -->
 	<!-- action="/loginController/login" -->
 	<form id="login_submit_form" style="max-width: 500px; margin: auto">
 		<div id="loginPage" class="loginPage">
