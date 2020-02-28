@@ -142,7 +142,10 @@ input[type=submit] {
   cursor: pointer;
 }
 </style>
-<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script> 
+					<!-- importing apis -->
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 
@@ -191,7 +194,8 @@ function loginFun(){
 					if(data.validation=="valid"){
 						window.open("headerPage.html","_self");
 					}else{
-						window.alert("invalid username or password");
+						//window.alert("invalid username or password");
+						sweetAlert("invalid credentials","User Name or Password is invalid !","error");
 						document.getElementById('userName').value='';
 						document.getElementById('password').value='';
 						}
@@ -203,10 +207,14 @@ function loginFun(){
 			
 		}
 	else{
-		if(modelObj.userName==''){
-			window.alert("user name cannot be empty");
+		
+		if((modelObj.userName=='')&&(modelObj.password=='')){
+			sweetAlert("Empty User Name and Password","User Name and Password cannot be empty!","error");
+		}
+		else if(modelObj.userName==''){
+			sweetAlert("Empty User Name","User Name cannot be empty!","error");
 		}else if(modelObj.password==''){
-			window.alert("password cannot be empty");
+			sweetAlert("Empty Password","Password cannot be empty!","error");
 		}
 	}
 		
