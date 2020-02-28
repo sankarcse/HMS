@@ -1,4 +1,4 @@
-package com.hms.test;
+/*package com.hms.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,4 +10,4 @@ class HmsApplicationTests {
 	void contextLoads() {
 	}
 
-}
+}*/

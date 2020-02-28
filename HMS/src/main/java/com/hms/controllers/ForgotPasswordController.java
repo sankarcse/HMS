@@ -1,7 +1,5 @@
 package com.hms.controllers;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
