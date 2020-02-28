@@ -192,7 +192,14 @@ function loginFun(){
 				},
 				success:function(data){
 					if(data.validation=="valid"){
-						window.open("headerPage.html","_self");
+						
+						
+						sweetAlert("Success","Welcome to Hostel Management System","success").then(okay => {
+							   if (okay) {
+								   window.open("headerPage.html","_self");
+								  }
+						});
+		
 					}else{
 						//window.alert("invalid username or password");
 						sweetAlert("invalid credentials","User Name or Password is invalid !","error");
