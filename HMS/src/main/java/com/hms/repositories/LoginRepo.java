@@ -9,5 +9,7 @@ import com.hms.entities.LoginEntity;
 public interface LoginRepo extends JpaRepository<LoginEntity, String> {
 
 	public LoginEntity findByUserNameAndUserPassword(String userName,String userPassword);
-
+	
+	public LoginEntity findByUserName(String userName);
+	
 }

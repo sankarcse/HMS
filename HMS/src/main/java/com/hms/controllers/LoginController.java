@@ -30,19 +30,19 @@ public class LoginController {
 	public String loginUser(@RequestParam(value = "userName") String email,
 			@RequestParam("password") String password) throws JsonProcessingException {
 		LoginEntity loginEntity = new LoginEntity(email, password);
-		System.out.println(loginEntity.getClass());
+		
 		Map<String, String> map = new HashMap<String, String>();
-		// JsonObject obj=new JsonObject();
+		
 		if ("valid".equals(service.loginUser(loginEntity))) {
 
-			// obj.addProperty("validation", "valid");
+			
 			map.put("validation", "valid");
 			 ObjectMapper objectMapper = new ObjectMapper();
 			 String json=objectMapper.writeValueAsString(map);
 			return json;
 		} else {
 			map.put("validation", "invalid");
-			// obj.addProperty("validation", "valid");
+			
 
 			 ObjectMapper objectMapper = new ObjectMapper();
 			 String json=objectMapper.writeValueAsString(map);
