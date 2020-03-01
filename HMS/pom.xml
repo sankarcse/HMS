@@ -19,27 +19,27 @@
 		<java.version>1.8</java.version>
 		<start-class>com.hms.UserRegistrationApplication</start-class>
 	</properties>
-<packaging>war</packaging>
+	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-jdbc -->
-		
-	<!-- 	2/29/2020
-		
-		<dependency>
+
+
+
+		<!-- <dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-jdbc</artifactId>
-			</dependency>
+		</dependency> -->
 
-		https://mvnrepository.com/artifact/org.springframework.session/spring-session-core
-		<dependency>
+		<!--https://mvnrepository.com/artifact/org.springframework.session/spring-session-core -->
+		<!-- <dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>
-		</dependency>
- -->
+		</dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,17 +55,15 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.4.10.Final</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+			</dependency> -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.10.0</version>
 		</dependency>
-	
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,23 +75,19 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- 2/29/2020
+
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
- -->	
- 
- 
- 	<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
-	<!-- 	<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jasper</artifactId>
-			<version>9.0.2</version>
-		</dependency>
- -->
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
+		<!-- <dependency> <groupId>org.apache.tomcat</groupId> <artifactId>tomcat-jasper</artifactId> 
+			<version>9.0.2</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -108,6 +102,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>hms</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
