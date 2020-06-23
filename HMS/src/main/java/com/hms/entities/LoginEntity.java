@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-@Entity(name = "admin_users")
+import javax.persistence.Table;
+@Entity
+@Table(name = "admin_users")
 public class LoginEntity {
 	
 	public LoginEntity() {}
@@ -15,27 +16,24 @@ public class LoginEntity {
 		this.userPassword=password;
 	}
 	
-	
-	
-	@Id
-	@Column(name = "user_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userid;
 
+	@Id
 	@Column(name = "user_name")
 	private String userName;
 
 	@Column(name = "user_password")
 	private String userPassword;
+	
+	
+	private String email;
+	
 
-	public int getUserid() {
-		return userid;
+	public String getEmail() {
+		return email;
 	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -51,5 +49,6 @@ public class LoginEntity {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+	
 
 }

@@ -3,6 +3,9 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box; margin-bottom:10;}
@@ -178,9 +181,28 @@ outline:0;
 }
 
 
+th {
+  background-color: green;
+  color:white;
+}
+table{
+/* margin-left:20px; */
 
+}
 
+td, th {
+  border: 1px solid green;
+  text-align: center;
+  padding: 8px;
+}
 
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.customerTableDiv{
+	text-align:center;
+}
 
 
 
@@ -188,8 +210,15 @@ outline:0;
 
 
 </style>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 <script>
 
+$("#customerTable").on('click', '.btnDelete', function () {
+    $(this).closest('tr').remove();
+});
 	function createRooms(){
 		for(var i=0;i<document.getElementById('rooms').value;i++){
 	    var x = document.createElement("INPUT");
@@ -203,6 +232,7 @@ outline:0;
 	}
 
 function dashboard(){
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('dashboard').style.display="block";
 	document.getElementById('tab1').style.backgroundColor="green";
 	
@@ -226,7 +256,10 @@ function dashboard(){
 	
 }
 
+var i=1;
 function homeClick(){
+	
+	document.getElementById('customerTable').style.display="block";
 	document.getElementById('tab2').style.backgroundColor="green";
 	document.getElementById('homeNavbar').style.display="block";
 	document.getElementById('admintab1').style.backgroundColor="dodgerblue";
@@ -256,13 +289,54 @@ function homeClick(){
 
 		document.getElementById('editPayment').style.display="none";
 
+		
+		
+		
+		$.ajax({
 
+		      url: "/customersController/getAllCustomers",
 
+		      type: "GET",
+
+		  	headers:{
+				"Content-Type":"application/json",
+				"Accept":"application/json"
+			},
+		      success: function(data){
+		    	 console.log(data);
+		    	 var cust_data='';
+		    	
+		    	 i=1;
+		    		$.each(data,function(key,value){
+		    			cust_data +='<tr class="edit_row"+i>';
+		    			cust_data +='<td class="firstName"+i>'+value.sno+'.'+value.firstName+'</td>';
+		    			cust_data +='<td class="lastName"+i>'+value.lastName+'</td>';
+		    			cust_data +='<td class="email"+i>'+value.email+'</td>';
+		    			cust_data +='<td class="joiningDate"+i>'+value.joiningDate+'</td>';
+		    			cust_data +='<td class="phoneNumber"+i>'+value.phoneNumber+'</td>';
+		    			cust_data +='<td class="workPlace"+i>'+value.workPlace+'</td>';
+		    			cust_data +='<td class="profession"+i>'+value.profession+'</td>';
+		    			cust_data +='<td class="homeTown"+i>'+value.homeTown+','+value.district+','+value.state+','+value.country+','+value.pincode+'</td>';
+		    			//cust_data +='<td><button class="btnDelete">Edit</button></td>';
+		    			cust_data +='<tr>';
+		    			i=i+1;
+		    		});
+		    		$("#customerTable td").remove();
+		    		$('#customerTable').append(cust_data);
+		    		
+		     },
+		      error:function(){
+
+		    	  sweetAlert("error","something went wrong","error");
+		      }   
+
+		  }); 
 }
 
 
 function adminPage(){
 
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('adminNavbar').style.display="block";
 	document.getElementById('tab3').style.backgroundColor="green";
 	document.getElementById('admintab1').style.backgroundColor="dodgerblue";
@@ -293,6 +367,7 @@ function adminPage(){
 }
 
 function adminRegister(){
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('adminNavbar').style.display="block";
 	document.getElementById('AdminRegisterPage').style.display="block";
 	document.getElementById('tab3').style.backgroundColor="green";
@@ -319,11 +394,15 @@ function adminRegister(){
 
 
 function custRegister(){
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('customerRegistration').style.display="block";
+	document.getElementById('editCustomerSerial').style.display="none";
 	document.getElementById('homeNavbar').style.display="block";
 	document.getElementById('tab2').style.backgroundColor="green";
 	document.getElementById('hometab1').style.backgroundColor="green";
-
+	document.getElementById('hometab2').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab3').style.backgroundColor="dodgerblue";
+	document.getElementById('delCustomerButton').style.display="none";
 	
 	
 	
@@ -339,11 +418,120 @@ function custRegister(){
 	document.getElementById('hostelDetails').style.display="none";
 		document.getElementById('paymentNavbar').style.display="none";
 		document.getElementById('editPayment').style.display="none";
+		document.getElementById('editCustomerButton').style.display="none";
+		document.getElementById('addCustomerButton').style.display="block";
+		
+		
+	 document.getElementById('firstName').value='';
+   	 document.getElementById('lastName').value='';
+   	 document.getElementById('joiningDate').value='';
+   	 document.getElementById('email').value='';
+   	 document.getElementById('phoneNumber').value='';
+   	 document.getElementById('adhaarNumber').value='';
+   	 document.getElementById('profession').value='';
+   	 document.getElementById('workPlace').value='';
+   	 document.getElementById('homeTown').value='';
+   	 document.getElementById('district').value='';
+   	 document.getElementById('state').value='';
+   	 document.getElementById('pinCode').value='';
+   	 document.getElementById('country').value='';
+   	 document.getElementById('roomNumber').value='';
+   	 document.getElementById('sharingType').value='';
+
+}
+
+function custEdit(){
+	document.getElementById('customerTable').style.display="none";
+	document.getElementById('customerRegistration').style.display="block";
+	document.getElementById('homeNavbar').style.display="block";
+	document.getElementById('tab2').style.backgroundColor="green";
+	document.getElementById('hometab1').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab2').style.backgroundColor="green";
+	document.getElementById('hometab3').style.backgroundColor="dodgerblue";
+	document.getElementById('editCustomerSerial').style.display="none";
+	document.getElementById('addCustomerButton').style.display="none";
+	document.getElementById('editCustomerButton').style.display="block";
+	document.getElementById('delCustomerButton').style.display="none";
+	document.getElementById('').style.display="none";
+	
+	
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+		
+		
+		document.getElementById('firstName').value='';
+	   	 document.getElementById('lastName').value='';
+	   	 document.getElementById('joiningDate').value='';
+	   	 document.getElementById('email').value='';
+	   	 document.getElementById('phoneNumber').value='';
+	   	 document.getElementById('adhaarNumber').value='';
+	   	 document.getElementById('profession').value='';
+	   	 document.getElementById('workPlace').value='';
+	   	 document.getElementById('homeTown').value='';
+	   	 document.getElementById('district').value='';
+	   	 document.getElementById('state').value='';
+	   	 document.getElementById('pinCode').value='';
+	   	 document.getElementById('country').value='';
+	   	 document.getElementById('roomNumber').value='';
+	   	 document.getElementById('sharingType').value='';
+	   	document.getElementById('sno').value='';	
+		
+		
+		
+		
+		
+		
 
 
 }
 
+function custDelete(){
+
+	document.getElementById('customerTable').style.display="none";
+	document.getElementById('customerRegistration').style.display="block";
+	document.getElementById('homeNavbar').style.display="block";
+	document.getElementById('tab2').style.backgroundColor="green";
+	document.getElementById('hometab1').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab2').style.backgroundColor="dodgerblue";
+	document.getElementById('hometab3').style.backgroundColor="green";
+	document.getElementById('editCustomerSerial').style.display="block";
+	document.getElementById('addCustomerButton').style.display="none";
+	document.getElementById('editCustomerButton').style.display="none";
+	document.getElementById('delCustomerButton').style.display="block";
+	document.getElementById('exceptSerialNumber').style.display="none";
+	
+	
+	
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	document.getElementById('tab5').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+		document.getElementById('paymentNavbar').style.display="none";
+		document.getElementById('editPayment').style.display="none";
+		
+	
+		
+}
+
+
 function hostelDetails(){
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('hostelDetailsNavbar').style.display="block";
 	
 	document.getElementById('tab4').style.backgroundColor="green";
@@ -375,6 +563,7 @@ function hostelDetails(){
 	
 	
 function hostelDetailsEdit(){
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('hostelDetailsNavbar').style.display="block";
 	document.getElementById('tab4').style.backgroundColor="green";
 	document.getElementById('hostel1').style.backgroundColor="green";
@@ -406,6 +595,7 @@ function hostelDetailsEdit(){
 	
 	function breakfastDetailsEdit(){
 	
+	document.getElementById('customerTable').style.display="none";
 	document.getElementById('hostelDetailsNavbar').style.display="block";
 	document.getElementById('breakfastDetails').style.display="block";
 
@@ -434,6 +624,7 @@ function hostelDetailsEdit(){
 	
 	function paymentDetails(){
 	
+		document.getElementById('customerTable').style.display="none";
 	document.getElementById('paymentNavbar').style.display="block";
 
 	document.getElementById('tab5').style.backgroundColor="green";
@@ -462,7 +653,7 @@ function hostelDetailsEdit(){
 	
 	
 		function doPayment(){
-	
+			document.getElementById('customerTable').style.display="none";
 	document.getElementById('paymentNavbar').style.display="block";
 	document.getElementById('editPayment').style.display="block";
 	document.getElementById('tab5').style.backgroundColor="green";
@@ -483,8 +674,50 @@ function hostelDetailsEdit(){
 	document.getElementById('hostelDetailsNavbar').style.display="none";
 	document.getElementById('breakfastDetails').style.display="none";
 	}
+		function doPayment(modelObj){
+			
+			
+	document.getElementById('customerTable').style.display="none";
+	document.getElementById('paymentNavbar').style.display="block";
+	document.getElementById('editPayment').style.display="block";
+	document.getElementById('tab5').style.backgroundColor="green";
+	document.getElementById('payment1').style.backgroundColor="green";
+	
+	document.getElementById('hostel1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab1').style.backgroundColor="dodgerblue";
+	document.getElementById('tab2').style.backgroundColor="dodgerblue";
+	document.getElementById('tab3').style.backgroundColor="dodgerblue";
+	document.getElementById('tab4').style.backgroundColor="dodgerblue";
+	
+	document.getElementById('dashboard').style.display="none";
+	document.getElementById('AdminRegisterPage').style.display="none";
+	document.getElementById('customerRegistration').style.display="none";
+	document.getElementById('homeNavbar').style.display="none";
+	document.getElementById('adminNavbar').style.display="none";
+	document.getElementById('hostelDetails').style.display="none";
+	document.getElementById('hostelDetailsNavbar').style.display="none";
+	document.getElementById('breakfastDetails').style.display="none";
+	
+	
+	
+	console.log(modelObj.firstName);
+	
+	//actions after calling do payemnet method
+	document.getElementById('pay_firstName').value=modelObj.firstName;
+	document.getElementById('pay_lastName').value=modelObj.lastName;
+	document.getElementById('pay_joiningDate').value=modelObj.joiningDate;
+	document.getElementById('pay_adharCardNumber').value=modelObj.adharCardNumber;
+	document.getElementById('pay_email').value=modelObj.email;
+	document.getElementById('pay_phoneNumber').value=modelObj.phoneNumber;
+	document.getElementById('pay_roomNumber').value=modelObj.roomNumber;
+	document.getElementById('pay_sharingType').value=modelObj.sharingType;
+	
+	}
+		
+	
 	
 	function pageloadfunction(){
+		document.getElementById('customerTable').style.display="none";
 		document.getElementById('adminNavbar').style.display="none";
 		document.getElementById('homeNavbar').style.display="none";
 		document.getElementById('hostelDetailsNavbar').style.display="none";
@@ -494,6 +727,8 @@ function hostelDetailsEdit(){
 		document.getElementById('hostelDetails').style.display="none";
 		document.getElementById('breakfastDetails').style.display="none";
 		document.getElementById('editPayment').style.display="none";
+		document.getElementById('delCustomerButton').style.display="none";
+		
 	}
 	
 	function logoutfun(){
@@ -510,6 +745,398 @@ function hostelDetailsEdit(){
 	}
 	setTimeout("preback()",0);
 	window.onunload=function(){null};
+
+	
+	
+	
+	function registerCustomer(){
+
+		
+		var modelObj={
+				          
+				
+				firstName:$("#firstName").val(),
+				lastName:$("#lastName").val(),
+				joiningDate:$("#joiningDate").val(),
+				email:$("#email").val(),
+				phoneNumber:$("#phoneNumber").val(),
+				adharCardNumber:$("#adhaarNumber").val(),
+				profession:$("#profession").val(),
+				workPlace:$("#workPlace").val(),
+				homeTown:$("#homeTown").val(),
+				district:$("#district").val(),
+				state:$("#state").val(),
+				country:$("#country").val(),
+				pincode:$("#pinCode").val(),
+				roomNumber:$("#roomNumber").val(),
+				sharingType:$("#sharingType").val()
+				
+				
+				
+				
+		};
+
+		if((modelObj.firstName!='')&&(modelObj.lastName!='')&&(modelObj.email!='')&&(modelObj.joiningDate!='')&&(modelObj.phoneNumber!='')&&(modelObj.adharCardNumber!='')&&(modelObj.profession!='')&&(modelObj.workPlace!='')&&(modelObj.homeTown!='')&&(modelObj.district!='')&&(modelObj.state!='')&&(modelObj.pincode!='')&&(modelObj.roomNumber!='')&&(modelObj.sharingType!='')){
+			
+			
+			$.ajax({
+
+			      url: "/customersController/addCustomer",
+
+			      type: "POST",
+
+			      dataType:'json',
+			      data: JSON.stringify(modelObj),
+			  	headers:{
+					"Content-Type":"application/json",
+					"Accept":"application/json"
+				},
+			      success: function(data){
+			    	  console.log(data.validation);
+			    	  if(data.validation=='valid'){
+			    	  sweetAlert("Success","customer registered successfully","success").then(okay => {
+						   if (okay) {
+							   return doPayment(modelObj);
+							   window.open("headerPage.html","_self");
+							  }
+					});
+			     }else{
+			    	 
+			    	 document.getElementById('firstName').value='';
+			    	 document.getElementById('lastName').value='';
+			    	 document.getElementById('joiningDate').value='';
+			    	 document.getElementById('email').value='';
+			    	 document.getElementById('phoneNumber').value='';
+			    	 document.getElementById('adhaarNumber').value='';
+			    	 document.getElementById('profession').value='';
+			    	 document.getElementById('workPlace').value='';
+			    	 document.getElementById('homeTown').value='';
+			    	 document.getElementById('district').value='';
+			    	 document.getElementById('state').value='';
+			    	 document.getElementById('pinCode').value='';
+			    	 document.getElementById('roomNumber').value='';
+			    	 document.getElementById('sharingType').value='';
+			    	 sweetAlert("sorry","Customer already Registered","error");
+			     }
+			      },
+			      error:function(){
+
+			    	  sweetAlert("error","something went wrong","error");
+			      }   
+
+			  }); 
+
+			}
+		else{
+			
+			if(modelObj.firstName==''){
+				sweetAlert("sorry","First Name cannot be empty!","error");
+			}
+			else if(modelObj.lastName==''){
+				sweetAlert("sorry","Last Name cannot be empty!","error");
+			}
+			else if(modelObj.joiningDate==''){
+				sweetAlert("sorry","Date of joining cannot be empty!","error");
+			}else if(modelObj.email==''){
+				sweetAlert("Sorry","Email cannot be empty!","error");
+			}else if(modelObj.phoneNumber==''){
+				sweetAlert("Sorry","Phone Number cannot be empty!","error");
+			}else if(modelObj.adharCardNumber==''){
+				sweetAlert("Sorry","Adhar Card Number cannot be empty!","error");
+			}else if(modelObj.profession==''){
+				sweetAlert("Sorry","Profession cannot be empty!","error");
+			}else if(modelObj.workPlace==''){
+				sweetAlert("Sorry","Work Place cannot be empty!","error");
+			}else if(modelObj.homeTown==''){
+				sweetAlert("Sorry","Home Town cannot be empty!","error");
+			}else if(modelObj.district==''){
+				sweetAlert("Sorry","District cannot be empty!","error");
+			}else if(modelObj.state==''){
+				sweetAlert("Sorry","State cannot be empty!","error");
+			}else if(modelObj.pincode==''){
+				sweetAlert("Sorry","Pincode cannot be empty!","error");
+			}
+			else if(modelObj.roomNumber==''){
+				sweetAlert("Sorry","Room Number cannot be empty!","error");
+			}
+			else if(modelObj.sharingType==''){
+				sweetAlert("Sorry","Sharing Type cannot be empty!","error");
+			}
+		}
+
+	}
+
+	function editCustomerButton(){
+		
+var modelObj={
+				          
+				
+				firstName:$("#firstName").val(),
+				lastName:$("#lastName").val(),
+				joiningDate:$("#joiningDate").val(),
+				email:$("#email").val(),
+				phoneNumber:$("#phoneNumber").val(),
+				adharCardNumber:$("#adhaarNumber").val(),
+				profession:$("#profession").val(),
+				workPlace:$("#workPlace").val(),
+				homeTown:$("#homeTown").val(),
+				district:$("#district").val(),
+				state:$("#state").val(),
+				country:$("#country").val(),
+				pincode:$("#pinCode").val(),
+				roomNumber:$("#roomNumber").val(),
+				sharingType:$("#sharingType").val()
+				
+		};
+		
+if((modelObj.firstName!='')&&(modelObj.lastName!='')&&(modelObj.email!='')&&(modelObj.joiningDate!='')&&(modelObj.phoneNumber!='')&&(modelObj.adharCardNumber!='')&&(modelObj.profession!='')&&(modelObj.workPlace!='')&&(modelObj.homeTown!='')&&(modelObj.district!='')&&(modelObj.state!='')&&(modelObj.pincode!='')&&(modelObj.roomNumber!='')&&(modelObj.sharingType!='')){
+	
+	
+	$.ajax({
+
+	      url: "/customersController/editCustomer",
+
+	      type: "POST",
+
+	      dataType:'json',
+	      data: JSON.stringify(modelObj),
+	  	headers:{
+			"Content-Type":"application/json",
+			"Accept":"application/json"
+		},
+	      success: function(data){
+	    	  console.log(data.validation);
+	    	  if(data.validation=='valid'){
+	    	  sweetAlert("Success","customer registered successfully","success").then(okay => {
+				   if (okay) {
+					   return doPayment(modelObj);
+					   window.open("headerPage.html","_self");
+					  }
+			});
+	     }else{
+	    	 
+	    	 document.getElementById('firstName').value='';
+	    	 document.getElementById('lastName').value='';
+	    	 document.getElementById('joiningDate').value='';
+	    	 document.getElementById('email').value='';
+	    	 document.getElementById('phoneNumber').value='';
+	    	 document.getElementById('adhaarNumber').value='';
+	    	 document.getElementById('profession').value='';
+	    	 document.getElementById('workPlace').value='';
+	    	 document.getElementById('homeTown').value='';
+	    	 document.getElementById('district').value='';
+	    	 document.getElementById('state').value='';
+	    	 document.getElementById('pinCode').value='';
+	    	 document.getElementById('roomNumber').value='';
+	    	 document.getElementById('sharingType').value='';
+	    	 sweetAlert("sorry","Customer already Registered","error");
+	     }
+	      },
+	      error:function(){
+
+	    	  sweetAlert("error","something went wrong","error");
+	      }   
+
+	  }); 
+
+	}
+else{
+	
+	if(modelObj.firstName==''){
+		sweetAlert("sorry","First Name cannot be empty!","error");
+	}
+	else if(modelObj.lastName==''){
+		sweetAlert("sorry","Last Name cannot be empty!","error");
+	}
+	else if(modelObj.joiningDate==''){
+		sweetAlert("sorry","Date of joining cannot be empty!","error");
+	}else if(modelObj.email==''){
+		sweetAlert("Sorry","Email cannot be empty!","error");
+	}else if(modelObj.phoneNumber==''){
+		sweetAlert("Sorry","Phone Number cannot be empty!","error");
+	}else if(modelObj.adharCardNumber==''){
+		sweetAlert("Sorry","Adhar Card Number cannot be empty!","error");
+	}else if(modelObj.profession==''){
+		sweetAlert("Sorry","Profession cannot be empty!","error");
+	}else if(modelObj.workPlace==''){
+		sweetAlert("Sorry","Work Place cannot be empty!","error");
+	}else if(modelObj.homeTown==''){
+		sweetAlert("Sorry","Home Town cannot be empty!","error");
+	}else if(modelObj.district==''){
+		sweetAlert("Sorry","District cannot be empty!","error");
+	}else if(modelObj.state==''){
+		sweetAlert("Sorry","State cannot be empty!","error");
+	}else if(modelObj.pincode==''){
+		sweetAlert("Sorry","Pincode cannot be empty!","error");
+	}
+	else if(modelObj.roomNumber==''){
+		sweetAlert("Sorry","Room Number cannot be empty!","error");
+	}
+	else if(modelObj.sharingType==''){
+		sweetAlert("Sorry","Sharing Type cannot be empty!","error");
+	}
+}
+		
+}
+	
+	function delCustomer(){
+		var modelObj={
+				
+				
+				sno:parseInt($("#sno").val())
+		};
+		
+		$.ajax({
+
+		      url: "/customersController/delCustomer",
+
+		      type: "POST",
+
+		      dataType:'json',
+		      data: JSON.stringify(modelObj),
+		  	headers:{
+				"Content-Type":"application/json",
+				"Accept":"application/json"
+			},
+		      success: function(data){
+		    	  console.log(data.status);
+		    	  if(data.status=='success'){
+		    	  sweetAlert("Success","Customer deleted successfully","success").then(okay => {
+					   if (okay) {
+						   return homeClick();
+						  }
+				});
+		     	}else{
+		    	    	 
+		   
+		    	 sweetAlert("sorry","Something went wrong","error");
+		     }
+		      },
+		      error:function(){
+
+		    	  sweetAlert("error","something went wrong","error");
+		      }   
+
+		  }); 
+		
+	}
+	
+function submitPayment(){
+	
+	var modelObj={
+			firstName:$("#pay_firstName").val(),
+			lastName:$("#pay_lastName").val(),
+			joiningDate:$("#pay_joiningDate").val(),
+			email:$("#pay_email").val(),
+			phoneNumber:$("#pay_phoneNumber").val(),
+			roomNumber:$("#pay_roomNumber").val(),
+			adharCardNumber:$("#pay_adharCardNumber").val(),
+			sharingType:$("#pay_sharingType").val(),
+			actualFee:Number($("#pay_actualFee").val()),
+			payingNow:Number($("#pay_payingNow").val())
+			
+			
+	};
+	
+	
+	if((modelObj.firstName!='')&&(modelObj.lastName!='')&&(modelObj.email!='')&&(modelObj.joiningDate!='')&&(modelObj.phoneNumber!='')&&(modelObj.roomNumber!='')&&(modelObj.sharingType!='')&&(modelObj.actualFee!='')&&(modelObj.payingNow!='')&&(modelObj.adharCardNumber!='')){
+	$.ajax({
+
+	      url: "/paymentController/doPayment",
+
+	      type: "POST",
+
+	      dataType:'json',
+	      data: JSON.stringify(modelObj),
+	  	headers:{
+			"Content-Type":"application/json",
+			"Accept":"application/json"
+		},
+	      success: function(data){
+	    	  console.log(data.validation);
+	    	  if(data.validation=='valid'){
+	    	  sweetAlert("Success","Payment done successfully","success").then(okay => {
+				   if (okay) {
+					   window.open("headerPage.html","_self");
+					  }
+			});
+	     	}else{
+	    	 
+	    	 document.getElementById('pay_firstName').value='';
+	    	 document.getElementById('pay_lastName').value='';
+	    	 document.getElementById('pay_joiningDate').value='';
+	    	 document.getElementById('pay_email').value='';
+	    	 document.getElementById('pay_phoneNumber').value='';
+	    	 document.getElementById('pay_roomNumber').value='';
+	    	 document.getElementById('pay_sharingType').value='';
+	    	 document.getElementById('pay_actualFee').value='';
+	    	 document.getElementById('pay_payingNow').value='';
+	    	 document.getElementById('pay_adharCardNumber').value='';
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 sweetAlert("sorry","Something went wrong","error");
+	     }
+	      },
+	      error:function(){
+
+	    	  sweetAlert("error","something went wrong","error");
+	      }   
+
+	  }); 
+		
+	}
+}
+
+function fetchSerialNumberCust(){
+	
+	var modelObj={
+			sno:parseInt($("#sno").val())
+	};
+	
+
+	if(((modelObj.sno>0)&&(modelObj.sno<i))&&(Number.isInteger(parseInt(modelObj.sno)))){
+		console.log("iteratipon"+i);
+		$.ajax({
+
+		      url: "/customersController/getserilaNumber",
+
+		      type: "POST",
+
+		      dataType:'json',
+		      data: JSON.stringify(modelObj),
+		  	headers:{
+				"Content-Type":"application/json",
+				"Accept":"application/json"
+			},
+		      success: function(data){
+		    	 	 var d=new Date(data.joiningDate);
+		    	 	 document.getElementById('firstName').value=data.firstName;
+			    	 document.getElementById('lastName').value=data.lastName;
+			    	 document.getElementById('joiningDate').value=d.getMonth()+1+'/'+d.getDate()+'/'+d.getFullYear();
+			    	 document.getElementById('email').value=data.email;
+			    	 document.getElementById('phoneNumber').value=data.phoneNumber;
+			    	 document.getElementById('adhaarNumber').value=data.adharCardNumber;
+			    	 document.getElementById('profession').value=data.profession;
+			    	 document.getElementById('workPlace').value=data.workPlace;
+			    	 document.getElementById('homeTown').value=data.homeTown;
+			    	 document.getElementById('district').value=data.district;
+			    	 document.getElementById('state').value=data.state;
+			    	 document.getElementById('pinCode').value=data.pincode;
+			    	 document.getElementById('country').value=data.country;
+			    	 document.getElementById('roomNumber').value=data.roomNumber;
+			    	 document.getElementById('sharingType').value=data.sharingType;
+		      },
+		      error:function(){
+
+		    	  sweetAlert("error","something went wrong","error");
+		      }   
+
+		  }); 
+	}
+}
+
 
 
 </script>
@@ -542,51 +1169,77 @@ function hostelDetailsEdit(){
   <a id="hometab3" onclick="custDelete()"><i class="fa fa-trash"></i>Delete Customer</a>
 </div>
 <!--customer registration form-->  
-<form action="/action_page.php" style="max-width:500px;margin:auto;" >
+<form  id="addCustomer" style="max-width:500px;margin:auto;" >
 <div class="customerRegistration" id="customerRegistration">
+<div class="editCustomerSerial" id="editCustomerSerial">
+<label style="margin-right:220px">Enter Serial Number</label>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input id="sno" class="input-field" type="text" placeholder="Enter Seril Number to Delete" name="SerialNumber">
+  </div>
+  <div id="delCustomerButton"> 
+  <button type="button" class="btn" onclick="delCustomer()">Delete Customer</button>
+  </div>
+</div>
+
+<div id="exceptSerialNumber">
+<label style="margin-right:220px">Enter Serial Number</label>
+<div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input id="sno1" class="input-field" onchange="fetchSerialNumberCust()" type="text" placeholder="Seril Number" name="SerialNumber">
+  </div>
 <label style="margin-right:220px">First Name</label>
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+    <input id="firstName" class="input-field" type="text" placeholder="First Name" name="firstName">
   </div>
   <label style="margin-right:220px">Last Name</label>
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+    <input id="lastName"class="input-field" type="text" placeholder="Last Name" name="lastName">
   </div>
   
   <label style="margin-right:220px">Joining Date</label>
   <div class="input-container">
     <i class="fa fa-calendar icon"></i>
-    <input class="input-field" type="date" placeholder="Joining Date" name="joiningDate">
+    <input id="joiningDate" class="input-field" type="text" placeholder="mm/dd/yyyy" name="joiningDate">
   </div>
   
 <label style="margin-right:270px">Email</label>
   <div class="input-container">
     <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" placeholder="Email (Optional)" name="email">
+    <input id="email" class="input-field" type="text" placeholder="Email (Optional)" name="email">
   </div>
 <label style="margin-right:200px">Phone Number</label>
  <div class="input-container">
     <i class="fa fa-phone icon"></i>
-    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
+    <input id="phoneNumber" class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
   </div>
   <label style="margin-right:150px">Adhaar Card Number</label>
   <div class="input-container">
     <i class="fa fa-id-card icon"></i>
-    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+    <input id="adhaarNumber" class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
   </div>
-  
+  <label style="margin-right:150px">Room Number</label>
+  <div class="input-container">
+    <i class="fa fa-id-card icon"></i>
+    <input id="roomNumber" class="input-field" type="text" placeholder="Room Number" name="roomNumber">
+  </div>
+  <label style="margin-right:150px">Sharing Type</label>
+  <div class="input-container">
+    <i class="fa fa-id-card icon"></i>
+    <input id="sharingType" class="input-field" type="text" placeholder="Sharing Type" name="sharingType">
+  </div>
   <label style="margin-right:220px">Profession</label>
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Profession" name="profession">
+    <input id="profession" class="input-field" type="text" placeholder="Profession" name="profession">
   </div>
   
   <label style="margin-right:220px">Work Place</label>
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Work Place" name="workPlace">
+    <input id="workPlace" class="input-field" type="text" placeholder="Work Place" name="workPlace">
   </div>
   <div class="addressLable">
 	<i class="fa fa-home icon"></i>
@@ -595,34 +1248,66 @@ function hostelDetailsEdit(){
 	<div class="addressPart">
    <label style="margin-right:210px">Home Town</label>
   <div class="input-container">
-    <input class="input-field" type="text" placeholder="Home Town" name="homeTown">
+    <input id="homeTown" class="input-field" type="text" placeholder="Home Town" name="homeTown">
   </div>
   
    <label style="margin-right:250px">District</label>
   <div class="input-container">
-    <input class="input-field" type="text" placeholder="District" name="district">
+    <input id="district" class="input-field" type="text" placeholder="District" name="district">
   </div>
   
    <label style="margin-right:260px">State</label>
   <div class="input-container">
-    <input class="input-field" type="text" placeholder="State" name="state">
+    <input id="state" class="input-field" type="text" placeholder="State" name="state">
   </div>
 
  <label style="margin-right:240px">Country</label>
   <div class="input-container">
     
-    <input class="input-field" type="text" placeholder="Country" name="country">
+    <input id="country" class="input-field" type="text" placeholder="Country" name="country">
   </div>
   <label style="margin-right:170px">Pin Code Number</label>
   <div class="input-container">
-    <input class="input-field" type="text" placeholder="Pin Code Number" name="pinCode">
-  </div>  
-  <button type="submit" class="btn">Add Customer</button>
+    <input id="pinCode" class="input-field" type="text" placeholder="Pin Code Number" name="pinCode">
+  </div> 
+  
+  
+  
+  
+  </div>
+  <div id="addCustomerButton"> 
+  <button type="button" class="btn" onclick="registerCustomer()">Add Customer</button>
+  </div>
+  <div id="editCustomerButton">
+  <button type="button" class="btn" onclick="editCustomerButton()">Edit Customer</button>
+  
   </div>
   </div>
+  </div>
+  
 </form>
 
 </div>
+
+
+<div class="customerTableDiv" id="customerTableDiv">
+
+<table align="center" class="table table-striped" id="customerTable">
+<tr>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Email</th>
+<th>Joining Date</th>
+<th>Phone Number</th>
+<th>Work Place</th>
+<th>Profession</th>
+<th>Address</th>
+<tr>
+</table>
+
+</div>
+
+
 
 
 <!-- admin div -->
@@ -756,54 +1441,63 @@ function hostelDetailsEdit(){
   <a id="payment1" onclick="doPayment()">Do Payment</a>
 </div>
 
-  <form action="/action_page.php" style="max-width:500px;margin:auto;" >
+
 <div class="editPayment" id="editPayment">
 <label style="margin-right:220px">First Name</label>
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+    <input id="pay_firstName"class="input-field" type="text" placeholder="First Name" name="firstName">
   </div>
   <label style="margin-right:220px">Last Name</label>
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+    <input id="pay_lastName" class="input-field" type="text" placeholder="Last Name" name="lastName">
   </div>
   
   <!--auto fill based on user date of joining-->
   <label style="margin-right:220px">Joining Date</label>
   <div class="input-container">
     <i class="fa fa-calendar icon"></i>
-    <input class="input-field" type="date" placeholder="Joining Date" name="joiningDate">
+    <input id="pay_joiningDate"class="input-field" type="text" placeholder="Joining Date" name="joiningDate">
   </div>
-  
+  <label style="margin-right:168px">Adhar Card Number</label>
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input id="pay_adharCardNumber" class="input-field" type="text" placeholder="Ahar Card Number" name="adharCardNumber">
+  </div>
 <label style="margin-right:270px">Email</label>
   <div class="input-container">
     <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" placeholder="Email (Optional)" name="email">
+    <input id="pay_email" class="input-field" type="text" placeholder="Email (Optional)" name="email">
   </div>
 <label style="margin-right:200px">Phone Number</label>
  <div class="input-container">
     <i class="fa fa-phone icon"></i>
-    <input class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
+    <input id="pay_phoneNumber" class="input-field" type="tel" placeholder="Phone Number" name="phoneNumber">
   </div>
   <label style="margin-right:200px">Room Number</label>
   <div class="input-container">
 <i class="fa fa-hotel icon"></i> 
    
-    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+    <input id="pay_roomNumber" class="input-field" type="text" placeholder="Room Number" name="roomNumber">
   </div>
   
+   <label style="margin-right:220px">Sharing Type</label>
+  <div class="input-container">
+    <i class="fa fa-rupee icon"></i>
+    <input id="pay_sharingType" class="input-field" type="text" placeholder="Sharing Type" name="sharingType">
+  </div>
    <label style="margin-right:220px">Actual Fee</label>
   <div class="input-container">
     <i class="fa fa-rupee icon"></i>
-    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+    <input id="pay_actualFee" class="input-field" type="text" placeholder="Actual Fee" name="actualFee">
   </div>
    <label style="margin-right:200px">Now Paying</label>
   <div class="input-container">
     <i class="fa fa-rupee icon"></i>
-    <input class="input-field" type="text" placeholder="Adhaar Number" name="adhaarNumber">
+    <input id="pay_payingNow" class="input-field" type="text" placeholder="Now Paying" name="nowPaying">
   </div>
-  <button type="submit" class="btn">Pay</button>
+  <button type="button" class="btn" onclick="submitPayment()" >Pay</button>
  </div>
 </form>
 </div>

@@ -186,15 +186,13 @@ function loginFun(){
 			
 			$.ajax({
 				type:"GET",
-				url:"/hms/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
+				url:"/loginController/login?userName="+modelObj.userName+"&password="+modelObj.password,
 				headers:{
 					"Content-Type":"application/json",
 					"Accept":"application/json"
 				},
 				success:function(data){
 					if(data.validation=="valid"){
-						
-						
 						sweetAlert("Success","Welcome to Hostel Management System","success").then(okay => {
 							   if (okay) {
 								   window.open("headerPage.html","_self");
@@ -225,10 +223,6 @@ function loginFun(){
 			sweetAlert("Empty Password","Password cannot be empty!","error");
 		}
 	}
-		
-	
-	
-	 
 }
 
 
