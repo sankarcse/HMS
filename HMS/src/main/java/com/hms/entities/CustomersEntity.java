@@ -1,7 +1,5 @@
 package com.hms.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,7 +23,7 @@ public class CustomersEntity {
 	private Integer sno;
 	private String firstName;
 	private String lastName;
-	private Date joiningDate;
+	private String joiningDate;
 	private String email;
 	private String phoneNumber;
 	@Id
@@ -52,11 +50,11 @@ public class CustomersEntity {
 	public void setRoomNumber(String roomNumber) {
 		this.roomNumber = roomNumber;
 	}
-	public Date getJoiningDate() {
+	public String getJoiningDate() {
 		return joiningDate;
 	}
-	public void setJoiningDate(Date joiningDate) {
-		this.joiningDate = joiningDate;
+	public void setJoiningDate(String localDate) {
+		this.joiningDate = localDate;
 	}
 	public String getCountry() {
 		return country;

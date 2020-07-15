@@ -1,6 +1,11 @@
 package com.hms.controllers;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -44,12 +49,11 @@ public class CustomersController {
 
 	
 	@PostMapping(value="/addCustomer",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String addCustomer(@RequestBody CustomersEntity customersEntity) throws JsonProcessingException {
-		
+	public String addCustomer(@RequestBody CustomersEntity customersEntity) throws JsonProcessingException, ParseException {
+	
 		String customersEntity2=customersService.addCustomer(customersEntity);
 		
 		return customersEntity2;
-		
 	}
 	
 	@GetMapping(value="/getAllCustomers",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

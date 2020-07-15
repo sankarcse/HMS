@@ -403,7 +403,7 @@ function custRegister(){
 	document.getElementById('hometab2').style.backgroundColor="dodgerblue";
 	document.getElementById('hometab3').style.backgroundColor="dodgerblue";
 	document.getElementById('delCustomerButton').style.display="none";
-	
+	document.getElementById('hideSerialNumber').style.display="none";
 	
 	
 	document.getElementById('tab1').style.backgroundColor="dodgerblue";
@@ -452,7 +452,7 @@ function custEdit(){
 	document.getElementById('addCustomerButton').style.display="none";
 	document.getElementById('editCustomerButton').style.display="block";
 	document.getElementById('delCustomerButton').style.display="none";
-	document.getElementById('').style.display="none";
+	//document.getElementById('').style.display="none";
 	
 	
 	document.getElementById('tab1').style.backgroundColor="dodgerblue";
@@ -757,7 +757,7 @@ function hostelDetailsEdit(){
 				
 				firstName:$("#firstName").val(),
 				lastName:$("#lastName").val(),
-				joiningDate:$("#joiningDate").val(),
+				joiningDate:new Date($("#joiningDate").val()).toLocaleString().split(",")[0],
 				email:$("#email").val(),
 				phoneNumber:$("#phoneNumber").val(),
 				adharCardNumber:$("#adhaarNumber").val(),
@@ -769,7 +769,8 @@ function hostelDetailsEdit(){
 				country:$("#country").val(),
 				pincode:$("#pinCode").val(),
 				roomNumber:$("#roomNumber").val(),
-				sharingType:$("#sharingType").val()
+				sharingType:$("#sharingType").val(),
+				sno:0
 				
 				
 				
@@ -1183,10 +1184,12 @@ function fetchSerialNumberCust(){
 </div>
 
 <div id="exceptSerialNumber">
+<div id="hideSerialNumber">
 <label style="margin-right:220px">Enter Serial Number</label>
 <div class="input-container">
     <i class="fa fa-user icon"></i>
     <input id="sno1" class="input-field" onchange="fetchSerialNumberCust()" type="text" placeholder="Seril Number" name="SerialNumber">
+  </div>
   </div>
 <label style="margin-right:220px">First Name</label>
   <div class="input-container">
@@ -1202,7 +1205,7 @@ function fetchSerialNumberCust(){
   <label style="margin-right:220px">Joining Date</label>
   <div class="input-container">
     <i class="fa fa-calendar icon"></i>
-    <input id="joiningDate" class="input-field" type="text" placeholder="mm/dd/yyyy" name="joiningDate">
+    <input id="joiningDate" class="input-field" type="text" placeholder="mm-dd-yyyy" name="joiningDate">
   </div>
   
 <label style="margin-right:270px">Email</label>
