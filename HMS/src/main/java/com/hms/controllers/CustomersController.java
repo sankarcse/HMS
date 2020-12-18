@@ -56,7 +56,8 @@ public class CustomersController {
 		return customersEntity2;
 	}
 	
-	@GetMapping(value="/getAllCustomers",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/getAllCustomers", produces = "application/json")
+	@ResponseBody
 	public String getAllCustomers() throws JsonProcessingException {
 		
 		String customersEntity2=customersService.getAllCustomers();
